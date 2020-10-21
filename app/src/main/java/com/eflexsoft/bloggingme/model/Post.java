@@ -86,10 +86,10 @@ public class Post {
         this.date = date;
     }
 
-    @BindingAdapter("android:use_pretty_date")
-    public static void setTime(TextView textView,String time){
-
-    }
+//    @BindingAdapter("android:use_pretty_date")
+//    public static void setTime(TextView textView,String time){
+//
+//    }
 
     @BindingAdapter("android:load_image")
     public static void setImg(ImageView circleImageView, String utl){
@@ -100,5 +100,10 @@ public class Post {
         Glide.with(circleImageView).load(utl).apply(requestOptions).into(circleImageView);
 
     }
+    @BindingAdapter("android:set_Pretty_Time")
+    public static void setTime(TextView textView, String time){
 
+        textView.setText(UtilsClass.formatDate(time));
+
+    }
 }

@@ -30,7 +30,7 @@
 
                 <ImageView
                     android:id="@+id/back"
-                    android:layout_width="20sp"
+                    android:layout_width="30sp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="3sp"
                     android:layout_marginEnd="3sp"
@@ -56,7 +56,7 @@
                         android:singleLine="true"
                         android:text=""
                         android:textColor="#000"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/post_time"
@@ -66,8 +66,8 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="0dp"
                         android:layout_toEndOf="@id/detailed_pro_pic"
-                        android:text="7 hour age"
-                        android:textColor="#000"
+                        android:set_Pretty_Time="@{post.date}"
+                        android:textColor="#7E7E7E"
                         android:textSize="12sp" />
 
                 </RelativeLayout>

@@ -29,6 +29,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class PostRepository {
 
@@ -63,12 +64,15 @@ public class PostRepository {
 
             String date = dateFormat.format(Calendar.getInstance().getTime());
 
+            long likes = 0;
+
             HashMap<String, Object> map = new HashMap<>();
             map.put("StoryTitle", title);
             map.put("StoryBody", body);
             map.put("PosterId", firebaseAuth.getUid());
             map.put("postId", postId);
             map.put("date", date);
+            map.put("likes",likes);
             map.put("postImage", "none");
 
             documentReference.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -111,11 +115,12 @@ public class PostRepository {
 
                         DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Posts").document(postId);
 
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
 
                         Time time = new Time(Time.getCurrentTimezone());
 
                         String date = dateFormat.format(Calendar.getInstance().getTime());
+                        long likes = 0;
 
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("StoryTitle", title);
@@ -123,6 +128,7 @@ public class PostRepository {
                         map.put("PosterId", firebaseAuth.getUid());
                         map.put("postId", postId);
                         map.put("date", date);
+                        map.put("likes",likes);
                         map.put("postImage", downloadUri);
 
                         documentReference.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {

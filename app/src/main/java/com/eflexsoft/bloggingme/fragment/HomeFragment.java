@@ -1,6 +1,7 @@
 package com.eflexsoft.bloggingme.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,14 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -44,6 +50,9 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding fragmentHomeBinding;
 
     FragmentHomeViewModel viewModel;
+    int count = 1;
+    TextView textView;
+    boolean isLiked = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,6 +132,49 @@ public class HomeFragment extends Fragment {
 
                 String id = model.getPosterId();
 
+                holder.postItemBinding.likeSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+                    @Override
+                    public View makeView() {
+
+                        textView = new TextView(getContext());
+                        textView.setGravity(Gravity.CENTER_VERTICAL);
+                        textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        textView.setTextSize(15);
+
+                        return textView;
+                    }
+                });
+
+                holder.postItemBinding.likeSwitcher.setText("1");
+
+                Animation in = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_right);
+                Animation out = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_lift);
+
+                holder.postItemBinding.likeSwitcher.setInAnimation(in);
+                holder.postItemBinding.likeSwitcher.setOutAnimation(out);
+
+                int[] count = {1};
+                boolean[] isLiked = {false};
+
+                holder.postItemBinding.starButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (isLiked[0]) {
+                            holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_not_liked);
+                            isLiked[0] = false;
+                            count[0] = count[0] - 1;
+                        } else {
+                            holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_liked);
+                            isLiked[0] = true;
+                            count[0] = count[0] + 1;
+                        }
+
+                        holder.postItemBinding.likeSwitcher.setText(String.valueOf(count[0]));
+
+                    }
+                });
+
                 DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Users").document(id);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
@@ -152,8 +204,9 @@ public class HomeFragment extends Fragment {
                         intent.putExtra("id", model.getPosterId());
                         intent.putExtra("title", model.getStoryTitle());
                         intent.putExtra("body", model.getStoryBody());
-                        intent.putExtra("postId",model.getPostId());
-                        intent.putExtra("postImage",model.getPostImage());
+                        intent.putExtra("postId", model.getPostId());
+                        intent.putExtra("postImage", model.getPostImage());
+                        intent.putExtra("date", model.getDate());
                         startActivity(intent);
                     }
                 });
