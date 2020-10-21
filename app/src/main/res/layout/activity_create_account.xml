@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateAccountActivity">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/back"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/back"
+            android:text="Blogging me"
+            android:textColor="@color/colorPrimary"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/grating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/back"
+            android:text="We are happy \nyou are here"
+            android:textColor="#000000"
+            android:textSize="25sp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/name_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/grating"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@id/back"
+            android:hint="First name"
+            android:inputType="textCapWords"
+            android:textSize="12sp"
+            app:met_errorColor="#ff0000"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelAnimating="true"
+            app:met_floatingLabelText="First name"
+            app:met_floatingLabelTextColor="@color/colorPrimary"
+            app:met_floatingLabelTextSize="13sp"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_textColor="#000000"
+            app:met_textColorHint="#1D3442" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/name_last"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_first"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@id/back"
+            android:hint="Last name"
+            android:inputType="textCapWords"
+            android:textSize="12sp"
+            app:met_errorColor="#ff0000"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelAnimating="true"
+            app:met_floatingLabelText="Last name"
+            app:met_floatingLabelTextColor="@color/colorPrimary"
+            app:met_floatingLabelTextSize="13sp"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_textColor="#000000"
+            app:met_textColorHint="#1D3442" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_last"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@id/back"
+            android:hint="Email Address"
+            android:inputType="textWebEmailAddress"
+            android:textSize="12sp"
+            app:met_errorColor="#ff0000"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelAnimating="true"
+            app:met_floatingLabelText="Email Address"
+            app:met_floatingLabelTextColor="@color/colorPrimary"
+            app:met_floatingLabelTextSize="13sp"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_textColor="#000000"
+            app:met_textColorHint="#1D3442" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@id/back"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textSize="12sp"
+            app:met_errorColor="#ff0000"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelAnimating="true"
+            app:met_floatingLabelText="Password"
+            app:met_floatingLabelTextColor="@color/colorPrimary"
+            app:met_floatingLabelTextSize="13sp"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_textColor="#000000"
+            app:met_textColorHint="#1D3442" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/password_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/password"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@id/back"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:textSize="12sp"
+            app:met_errorColor="#ff0000"
+            app:met_floatingLabel="highlight"
+            app:met_floatingLabelAnimating="true"
+            app:met_floatingLabelText="Confirm Password"
+            app:met_floatingLabelTextColor="@color/colorPrimary"
+            app:met_floatingLabelTextSize="13sp"
+            app:met_primaryColor="@color/colorPrimary"
+            app:met_textColor="#000000"
+            app:met_textColorHint="#1D3442" />
+
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/login_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/create_acc"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="55sp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/login_account_btn_background"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            app:finalCornerAngle="5dp"
+            app:initialCornerAngle="5dp"
+            app:spinning_bar_color="#FFF"
+            app:spinning_bar_padding="1dp"
+            app:spinning_bar_width="2dp" />
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/or"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/login_continue"-->
+        <!--            android:layout_centerHorizontal="true"-->
+        <!--            android:layout_margin="5dp"-->
+        <!--            android:text="OR"-->
+        <!--            android:textColor="#8E8E8E"-->
+        <!--            android:textSize="20sp" />-->
+
+        <!--        <View-->
+        <!--            android:id="@+id/div"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:layout_below="@id/login_continue"-->
+        <!--            android:layout_marginStart="20dp"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            android:layout_toStartOf="@id/or"-->
+        <!--            android:background="#B8B8B8" />-->
+
+
+        <!--        <View-->
+        <!--            android:id="@+id/div2"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:layout_below="@id/login_continue"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            android:layout_marginEnd="20dp"-->
+        <!--            android:layout_toEndOf="@id/or"-->
+        <!--            android:background="#B8B8B8" />-->
+
+        <!--                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton-->
+        <!--                    android:id="@+id/create_account_continue"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_below="@id/div2"-->
+        <!--                    android:layout_centerHorizontal="true"-->
+        <!--                    android:layout_marginStart="10sp"-->
+        <!--                    android:layout_marginTop="20sp"-->
+        <!--                    android:layout_marginEnd="10sp"-->
+        <!--                    android:background="@drawable/log_in_btn_background2"-->
+        <!--                    android:fontFamily="monospace"-->
+        <!--                    android:text="Create Account"-->
+        <!--                    android:textAllCaps="false"-->
+        <!--                    android:textColor="@color/colorPrimary"-->
+        <!--                    android:textSize="20sp"-->
+        <!--                    app:spinning_bar_color="#FFF"-->
+        <!--                    app:spinning_bar_padding="1dp"-->
+        <!--                    app:spinning_bar_width="2dp" />-->
+
+
+        <TextView
+            android:id="@+id/create_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:text="@string/already_have_an_account_click_me_to_login"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/progress_r"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:alpha="0"
+            android:background="@drawable/progress_b"
+            android:padding="5dp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminateTint="#fff" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home_selected"
+        android:title="@string/home" />
+
+<!--    <item-->
+<!--        android:id="@+id/feed"-->
+<!--        android:icon="@drawable/ic_rss"-->
+<!--        android:title="My Feed" />-->
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/search_selected"
+        android:title="@string/search" />
+
+    <item
+        android:id="@+id/notification"
+        android:icon="@drawable/notify_selected"
+        android:title="@string/notification" />
+
+    <item
+        android:id="@+id/message"
+        android:icon="@drawable/message_selected"
+        android:title="@string/message" />
+
+</menu>

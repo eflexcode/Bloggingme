@@ -1,0 +1,72 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/CustomAnim</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/page2</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="blue" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomAnim" parent="@android:style/Animation.Activity">
+
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_lift</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+
+    </style>
+
+    <style name="NavI" parent="TextAppearance.AppCompat.Caption">
+
+        <item name="android:textSize">11sp</item>
+
+    </style>
+
+    <style name="NavT" parent="TextAppearance.AppCompat.Caption">
+
+        <item name="android:textSize">10sp</item>
+
+    </style>
+
+    <style name="StyleableToastW">
+        <item name="stColorBackground">@color/colorPrimary</item>
+        <item name="stRadius">3dp</item>
+        <item name="stTextColor">#fff</item>
+        <item name="stIconStart">@drawable/ic_baseline_warning_24</item>
+    </style>
+
+    <style name="StyleableToast">
+        <item name="stColorBackground">@color/colorPrimary</item>
+        <item name="stRadius">3dp</item>
+        <item name="stTextColor">#fff</item>
+        <item name="stIconStart">@drawable/ic_baseline_check_24</item>
+    </style>
+
+    <style name="text">
+        <item name="android:ellipsize">end</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+
+</resources>

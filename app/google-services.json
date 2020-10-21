@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "303713965562",
+    "firebase_url": "https://blogging-me.firebaseio.com",
+    "project_id": "blogging-me",
+    "storage_bucket": "blogging-me.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303713965562:android:ae9e6cb9e479c1f7ab8043",
+        "android_client_info": {
+          "package_name": "com.eflexsoft.bloggingme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303713965562-6l50pcssundh1pcf1jkfp3372hisuoci.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeyYj7zqw_KLmuoyqY5hYXqiz4RM8xQhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "303713965562-6l50pcssundh1pcf1jkfp3372hisuoci.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

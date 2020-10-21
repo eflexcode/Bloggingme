@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Blogging me</string>
+    <string name="don_t_have_an_account_click_me_to_register">Don\'t have an account? click me to <b>register</b></string>
+    <string name="already_have_an_account_click_me_to_login">Already have an account? click me to <b>login</b></string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="notification">Notification</string>
+    <string name="message">Message</string>
+    <string name="title_example_post_like_the_when_how_to_i_tinck">Story title : example of title <b>The,</b>  <b>When,</b> <b>How to,</b> <b>I thick,</b> <b>The first time,</b>  <b>How i</b> </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

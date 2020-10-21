@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PostActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/main_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#fff">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="20sp"
+                        android:text="Add story"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/draft"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="10dp"
+                        android:gravity="center"
+                        android:text="Draft"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!--    <View-->
+        <!--        android:id="@+id/vup"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="0.5dp"-->
+        <!--        android:layout_below="@id/main_app_bar"-->
+        <!--        android:background="#E8E8E8" />-->
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/bottom"
+            android:layout_below="@id/main_app_bar"
+            android:layout_gravity="fill_vertical"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/post_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="2dp"
+                    android:hint="@string/title_example_post_like_the_when_how_to_i_tinck"
+                    android:text=""
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:met_errorColor="#ff0000"
+                    app:met_textColor="#000000"
+                    app:met_textColorHint="#A5A5A5" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/post_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/post_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="2dp"
+                    android:hint="Full post"
+                    android:text=""
+                    android:textSize="15sp"
+                    app:met_errorColor="#ff0000"
+                    app:met_textColor="#000000"
+                    app:met_textColorHint="#A5A5A5" />
+
+                <TextView
+                    android:id="@+id/image_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/post_body"
+                    android:layout_alignEnd="@id/post_body"
+                    android:layout_marginStart="20sp"
+                    android:text="Add image"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/image_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:visibility="gone"
+                    android:layout_below="@+id/image_text"
+                    android:layout_margin="20sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_below="@id/image_post"
+                    android:gravity="bottom">
+
+                    <Button
+                        android:id="@+id/publish"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="15dp"
+                        android:background="@color/colorPrimary"
+                        android:text="Publish"
+                        android:textAllCaps="false"
+                        android:textColor="#FDFDFD"
+                        android:textSize="17sp" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <!--    <View-->
+        <!--        android:id="@+id/bottom"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="0.5dp"-->
+        <!--        android:layout_above="@id/bottom"-->
+        <!--        android:background="#E8E8E8" />-->
+
+        <!--    <RelativeLayout-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_gravity="bottom"-->
+        <!--        android:gravity="bottom"-->
+        <!--        android:layout_alignParentBottom="true">-->
+
+        <!--        <Button-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:layout_margin="15dp"-->
+        <!--            android:background="@color/colorPrimary"-->
+        <!--            android:text="Publish"-->
+        <!--            android:id="@+id/publish"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textColor="#FDFDFD"-->
+        <!--            android:textSize="17sp"-->
+        <!--            android:textStyle="bold" />-->
+
+        <!--    </RelativeLayout>-->
+
+        <!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent">-->
+
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:id="@+id/fab"-->
+        <!--            android:layout_gravity="end|bottom"-->
+        <!--            android:layout_margin="40sp"/>-->
+
+        <!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
+
+
+    </LinearLayout>
+</layout>
