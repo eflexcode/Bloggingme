@@ -9,16 +9,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PostDetailsActivity"></activity>
-        <activity android:name=".PostActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".OptionsActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".CreateAccountActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".CommentsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".PostDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PostActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfileActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".OptionsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

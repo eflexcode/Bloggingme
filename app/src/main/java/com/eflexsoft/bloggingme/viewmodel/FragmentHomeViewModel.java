@@ -32,4 +32,13 @@ public class FragmentHomeViewModel extends AndroidViewModel {
         userMutableLiveData = repository.userMutableLiveData;
         return userMutableLiveData;
     }
+
+    public void addLike(String postId) {
+        repository.addLike(postId);
+    }
+
+    public void removeLike(String postId) {
+        repository.removeLike(postId);
+    }
+
 }

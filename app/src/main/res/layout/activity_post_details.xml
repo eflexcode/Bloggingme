@@ -30,11 +30,11 @@
 
                 <ImageView
                     android:id="@+id/back"
-                    android:layout_width="30sp"
-                    android:layout_height="match_parent"
+                    android:layout_width="20sp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="3sp"
                     android:layout_marginEnd="3sp"
-                    android:src="@drawable/ic_back" />
+                    android:src="@drawable/ic_arrow" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -55,8 +55,9 @@
                         android:layout_toEndOf="@id/detailed_pro_pic"
                         android:singleLine="true"
                         android:text=""
+                        android:textStyle="bold"
                         android:textColor="#000"
-                        android:textSize="18sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/post_time"
@@ -96,7 +97,7 @@
                     android:layout_marginEnd="10dp"
                     android:text="@{post.storyTitle}"
                     android:textColor="#000"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -109,7 +110,7 @@
                     android:layout_marginEnd="10dp"
                     android:text="@{post.storyBody}"
                     android:textColor="#000"
-                    android:textSize="17sp" />
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:id="@+id/image_post"

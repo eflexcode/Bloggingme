@@ -25,17 +25,19 @@ public class Post {
     private String postId;
     private String postImage;
     private String date;
+    private long likes;
 
     public Post() {
     }
 
-    public Post(String storyTitle, String storyBody, String posterId, String postId, String postImage,String date) {
+    public Post(String storyTitle, String storyBody, String posterId, String postId, String postImage,String date,long likes) {
         StoryTitle = storyTitle;
         StoryBody = storyBody;
         PosterId = posterId;
         this.postId = postId;
         this.postImage = postImage;
         this.date = date;
+        this.likes = likes;
     }
 
     public String getStoryTitle() {
@@ -86,6 +88,13 @@ public class Post {
         this.date = date;
     }
 
+    public long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(long likes) {
+        this.likes = likes;
+    }
 //    @BindingAdapter("android:use_pretty_date")
 //    public static void setTime(TextView textView,String time){
 //

@@ -2,6 +2,7 @@ package com.eflexsoft.bloggingme.fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.eflexsoft.bloggingme.CommentsActivity;
 import com.eflexsoft.bloggingme.PostDetailsActivity;
 import com.eflexsoft.bloggingme.R;
 import com.eflexsoft.bloggingme.databinding.FragmentHomeBinding;
@@ -37,6 +39,7 @@ import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.firebase.ui.firestore.paging.LoadingState;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -51,7 +54,7 @@ public class HomeFragment extends Fragment {
 
     FragmentHomeViewModel viewModel;
     int count = 1;
-    TextView textView;
+
     boolean isLiked = false;
 
     @Override
@@ -124,6 +127,10 @@ public class HomeFragment extends Fragment {
             protected void onBindViewHolder(@NonNull PostItemViewHolder holder, int position, @NonNull Post model) {
 
                 holder.postItemBinding.setPost(model);
+
+                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(),R.raw.send);
+
+
                 if (model.getPostImage().equals("none")) {
                     holder.postItemBinding.imagePost.setVisibility(View.GONE);
                 } else {
@@ -132,20 +139,26 @@ public class HomeFragment extends Fragment {
 
                 String id = model.getPosterId();
 
-                holder.postItemBinding.likeSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
-                    @Override
-                    public View makeView() {
+                if (holder.postItemBinding.likeSwitcher.getCurrentView() == null) {
 
-                        textView = new TextView(getContext());
-                        textView.setGravity(Gravity.CENTER_VERTICAL);
-                        textView.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        textView.setTextSize(15);
+                    holder.postItemBinding.likeSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+                        @Override
+                        public View makeView() {
 
-                        return textView;
-                    }
-                });
+                            TextView textView = new TextView(getContext());
+                            textView.setGravity(Gravity.CENTER_VERTICAL);
+                            textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            textView.setTextSize(15);
 
-                holder.postItemBinding.likeSwitcher.setText("1");
+                            return textView;
+                        }
+                    });
+                }
+
+                long[] count = {model.getLikes()};
+                boolean[] isLiked = {false};
+
+                holder.postItemBinding.likeSwitcher.setText(String.valueOf(model.getLikes()));
 
                 Animation in = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in_right);
                 Animation out = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_lift);
@@ -153,8 +166,24 @@ public class HomeFragment extends Fragment {
                 holder.postItemBinding.likeSwitcher.setInAnimation(in);
                 holder.postItemBinding.likeSwitcher.setOutAnimation(out);
 
-                int[] count = {1};
-                boolean[] isLiked = {false};
+                FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
+                DocumentReference documentReference = firebaseFirestore.collection("Posts").document(model.getPostId())
+                        .collection("likesId").document(FirebaseAuth.getInstance().getUid());
+
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        assert value != null;
+                        if (value.exists()) {
+                            holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_liked);
+                            isLiked[0] = true;
+                        } else {
+                            holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_not_liked);
+                            isLiked[0] = false;
+                        }
+                    }
+                });
 
                 holder.postItemBinding.starButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -164,10 +193,14 @@ public class HomeFragment extends Fragment {
                             holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_not_liked);
                             isLiked[0] = false;
                             count[0] = count[0] - 1;
+                            viewModel.removeLike(model.getPostId());
+                            mediaPlayer.start();
                         } else {
                             holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_liked);
                             isLiked[0] = true;
                             count[0] = count[0] + 1;
+                            viewModel.addLike(model.getPostId());
+                            mediaPlayer.start();
                         }
 
                         holder.postItemBinding.likeSwitcher.setText(String.valueOf(count[0]));
@@ -175,8 +208,8 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-                DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Users").document(id);
-                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                DocumentReference documentReference2 = FirebaseFirestore.getInstance().collection("Users").document(id);
+                documentReference2.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
 
@@ -207,7 +240,15 @@ public class HomeFragment extends Fragment {
                         intent.putExtra("postId", model.getPostId());
                         intent.putExtra("postImage", model.getPostImage());
                         intent.putExtra("date", model.getDate());
+                        intent.putExtra("likes", model.getLikes());
                         startActivity(intent);
+                    }
+                });
+
+                holder.postItemBinding.messageComments.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getContext(), CommentsActivity.class));
                     }
                 });
 

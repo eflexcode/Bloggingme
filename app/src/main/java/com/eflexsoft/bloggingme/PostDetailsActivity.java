@@ -54,8 +54,9 @@ public class PostDetailsActivity extends AppCompatActivity {
         String postId = intent.getStringExtra("postId");
         String postImage = intent.getStringExtra("postImage");
         String date = intent.getStringExtra("date");
+        long likes = intent.getLongExtra("likes",0);
 
-        Post post = new Post(title,body,id,postId,postImage,date);
+        Post post = new Post(title,body,id,postId,postImage,date,likes);
 
         if (postImage.equals("none")) {
             detailsBinding.imagePost.setVisibility(View.GONE);

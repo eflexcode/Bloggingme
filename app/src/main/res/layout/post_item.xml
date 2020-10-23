@@ -20,7 +20,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:background="?android:selectableItemBackground">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -67,7 +66,7 @@
                 android:maxLines="3"
                 android:text="@{post.storyTitle}"
                 android:textColor="#000"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -76,13 +75,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/post_title"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="10dp"
                 android:ellipsize="end"
                 android:maxLines="5"
                 android:text="@{post.storyBody}"
                 android:textColor="#000"
-                android:textSize="17sp" />
+                android:textSize="13sp" />
 
             <ImageView
                 android:id="@+id/image_post"
@@ -106,7 +105,7 @@
 
                 <ImageView
                     android:id="@+id/star_button"
-                    android:layout_width="20dp"
+                    android:layout_width="25dp"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="0dp"
@@ -124,12 +123,11 @@
 
                 <ImageView
                     android:id="@+id/message_comments"
-                    android:layout_width="20dp"
-                    android:layout_height="25dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="0dp"
                     android:layout_toEndOf="@id/like_switcher"
-                    android:background="?android:selectableItemBackground"
                     android:src="@drawable/ic_message2" />
 
                 <TextSwitcher
@@ -141,17 +139,17 @@
                     android:layout_marginEnd="10dp"
                     android:layout_toEndOf="@id/message_comments" />
 
-
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="25dp"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="5dp"
-                    android:background="?android:selectableItemBackground"
                     android:src="@drawable/ic_share2" />
 
             </RelativeLayout>
+
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </layout>
