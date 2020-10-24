@@ -37,7 +37,7 @@
                     <ImageView
                         android:id="@+id/back"
                         android:layout_width="20sp"
-                        android:layout_height="20dp"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="3sp"
                         android:layout_marginEnd="3sp"
                         android:src="@drawable/ic_arrow" />
@@ -53,7 +53,7 @@
                             android:layout_centerVertical="true" />
 
                         <TextView
-                            android:id="@+id/uName"
+                            android:id="@+id/ptitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20sp"
@@ -69,11 +69,11 @@
                             android:id="@+id/post_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/uName"
+                            android:layout_below="@id/ptitle"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="0dp"
                             android:layout_toEndOf="@id/detailed_pro_pic"
-                            android:set_Pretty_Time="@{post.date}"
+
                             android:textColor="#7E7E7E"
                             android:textSize="12sp" />
 
@@ -104,12 +104,19 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
         <RelativeLayout
             android:id="@+id/sed_l_y"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/comment_img"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:visibility="gone"
+                android:src="@drawable/img_test" />
 
             <ImageView
                 android:id="@+id/add_img"
@@ -119,6 +126,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
+                android:layout_below="@id/comment_img"
                 android:layout_marginBottom="5dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_add_img" />
@@ -127,13 +135,16 @@
                 android:id="@+id/comment_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="5dp"
                 android:layout_toStartOf="@id/send"
+                android:layout_below="@id/comment_img"
                 android:layout_toEndOf="@id/add_img"
-
                 android:hint="Write a comment"
+                android:maxHeight="150dp"
+
                 android:textSize="15sp"
                 app:met_primaryColor="@color/colorPrimary"
                 app:met_textColor="#000000"
@@ -141,13 +152,13 @@
 
             <ImageView
                 android:id="@+id/send"
-                android:layout_width="30dp"
+                android:layout_width="25dp"
                 android:layout_height="40dp"
+                android:layout_below="@id/comment_img"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@android:color/transparent"
                 android:src="@drawable/ic_send_stroke" />
 
         </RelativeLayout>

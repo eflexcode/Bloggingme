@@ -26,11 +26,12 @@ public class Post {
     private String postImage;
     private String date;
     private long likes;
+    private long comments;
 
     public Post() {
     }
 
-    public Post(String storyTitle, String storyBody, String posterId, String postId, String postImage,String date,long likes) {
+    public Post(String storyTitle, String storyBody, String posterId, String postId, String postImage,String date,long likes,long comments) {
         StoryTitle = storyTitle;
         StoryBody = storyBody;
         PosterId = posterId;
@@ -38,6 +39,7 @@ public class Post {
         this.postImage = postImage;
         this.date = date;
         this.likes = likes;
+        this.comments = comments;
     }
 
     public String getStoryTitle() {
@@ -90,6 +92,14 @@ public class Post {
 
     public long getLikes() {
         return likes;
+    }
+
+    public long getComments() {
+        return comments;
+    }
+
+    public void setComments(long comments) {
+        this.comments = comments;
     }
 
     public void setLikes(long likes) {

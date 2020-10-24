@@ -128,9 +128,9 @@ public class HomeFragment extends Fragment {
 
                 holder.postItemBinding.setPost(model);
 
-                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(),R.raw.send);
-
-
+                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(),R.raw.like3);
+                mediaPlayer.setVolume(1,1);
+                
                 if (model.getPostImage().equals("none")) {
                     holder.postItemBinding.imagePost.setVisibility(View.GONE);
                 } else {
@@ -194,7 +194,7 @@ public class HomeFragment extends Fragment {
                             isLiked[0] = false;
                             count[0] = count[0] - 1;
                             viewModel.removeLike(model.getPostId());
-                            mediaPlayer.start();
+//                            mediaPlayer.start();
                         } else {
                             holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_liked);
                             isLiked[0] = true;
@@ -241,6 +241,7 @@ public class HomeFragment extends Fragment {
                         intent.putExtra("postImage", model.getPostImage());
                         intent.putExtra("date", model.getDate());
                         intent.putExtra("likes", model.getLikes());
+                        intent.putExtra("comments",model.getComments());
                         startActivity(intent);
                     }
                 });
@@ -248,7 +249,16 @@ public class HomeFragment extends Fragment {
                 holder.postItemBinding.messageComments.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getContext(), CommentsActivity.class));
+                        Intent intent = new Intent(getContext(), CommentsActivity.class);
+                        intent.putExtra("id", model.getPosterId());
+                        intent.putExtra("title", model.getStoryTitle());
+                        intent.putExtra("body", model.getStoryBody());
+                        intent.putExtra("postId", model.getPostId());
+                        intent.putExtra("postImage", model.getPostImage());
+                        intent.putExtra("date", model.getDate());
+                        intent.putExtra("likes", model.getLikes());
+                        intent.putExtra("comments",model.getComments());
+                        startActivity(intent);
                     }
                 });
 
