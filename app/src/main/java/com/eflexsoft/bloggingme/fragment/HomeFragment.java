@@ -282,7 +282,17 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-
+                holder.postItemBinding.shareBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("text/plan");
+                        intent.putExtra(Intent.EXTRA_SUBJECT,"Blogging me share");
+                        String text = model.getStoryTitle()+"\n\n want to read more? get the app on google play store it's called blogging me";
+                        intent.putExtra(Intent.EXTRA_TEXT,text);
+                        startActivity(Intent.createChooser(intent,"share with :"));
+                    }
+                });
 
             }
 

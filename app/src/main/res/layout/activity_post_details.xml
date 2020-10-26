@@ -55,9 +55,9 @@
                         android:layout_toEndOf="@id/detailed_pro_pic"
                         android:singleLine="true"
                         android:text=""
-                        android:textStyle="bold"
                         android:textColor="#000"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/post_time"
@@ -139,7 +139,6 @@
                         android:layout_centerVertical="true"
 
                         android:layout_marginStart="0dp"
-                        android:background="?android:selectableItemBackground"
                         android:src="@drawable/ic_romantic_heart" />
 
                     <TextSwitcher
@@ -153,6 +152,7 @@
                     <ImageView
                         android:id="@+id/message_comments"
                         android:layout_width="25dp"
+
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="10dp"
@@ -169,6 +169,7 @@
                         android:layout_toEndOf="@id/message_comments" />
 
                     <ImageView
+                        android:id="@+id/share_btn"
                         android:layout_width="25dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"

@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -33,7 +34,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_post_details);
 
-        ActivityPostDetailsBinding detailsBinding = DataBindingUtil.setContentView(this,R.layout.activity_post_details);
+        ActivityPostDetailsBinding detailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_post_details);
 
         detailsBinding.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,10 +60,10 @@ public class PostDetailsActivity extends AppCompatActivity {
         String postId = intent.getStringExtra("postId");
         String postImage = intent.getStringExtra("postImage");
         String date = intent.getStringExtra("date");
-        long likes = intent.getLongExtra("likes",0);
-        long comments = intent.getLongExtra("comments",0);
+        long likes = intent.getLongExtra("likes", 0);
+        long comments = intent.getLongExtra("comments", 0);
 
-        Post post = new Post(title,body,id,postId,postImage,date,likes,comments);
+        Post post = new Post(title, body, id, postId, postImage, date, likes, comments);
 
         if (postImage.equals("none")) {
             detailsBinding.imagePost.setVisibility(View.GONE);
@@ -110,6 +111,9 @@ public class PostDetailsActivity extends AppCompatActivity {
             });
         }
 
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.like3);
+        mediaPlayer.setVolume(1, 1);
+
         detailsBinding.likeSwitcher.setInAnimation(in);
         detailsBinding.likeSwitcher.setOutAnimation(out);
 
@@ -128,11 +132,76 @@ public class PostDetailsActivity extends AppCompatActivity {
 
                     Glide.with(PostDetailsActivity.this).load(user.getProPicUrl()).apply(requestOptions).into(detailsBinding.detailedProPic);
 
-                    detailsBinding.uName.setText(user.getFirstName()+" "+user.getLastName());
+                    detailsBinding.uName.setText(user.getFirstName() + " " + user.getLastName());
 
                 }
             }
         });
 
+        long[] count = {likes};
+        boolean[] isLiked = {false};
+
+        viewModel.getIsLiked(postId).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    detailsBinding.starButton.setImageResource(R.drawable.ic_heart_liked);
+                    isLiked[0] = true;
+                } else {
+                    detailsBinding.starButton.setImageResource(R.drawable.ic_heart_not_liked);
+                    isLiked[0] = false;
+                }
+            }
+        });
+
+        detailsBinding.starButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (isLiked[0]) {
+                    detailsBinding.starButton.setImageResource(R.drawable.ic_heart_not_liked);
+                    isLiked[0] = false;
+                    count[0] = count[0] - 1;
+                    viewModel.removeLike(postId);
+//                            mediaPlayer.start();
+                } else {
+                    detailsBinding.starButton.setImageResource(R.drawable.ic_heart_liked);
+                    isLiked[0] = true;
+                    count[0] = count[0] + 1;
+                    viewModel.addLike(postId);
+                    mediaPlayer.start();
+                }
+
+                detailsBinding.likeSwitcher.setText(String.valueOf(count[0]));
+
+            }
+        });
+        detailsBinding.messageComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PostDetailsActivity.this, CommentsActivity.class);
+                intent.putExtra("id", id);
+                intent.putExtra("title", title);
+                intent.putExtra("body", body);
+                intent.putExtra("postId", postId);
+                intent.putExtra("postImage", postImage);
+                intent.putExtra("date", date);
+                intent.putExtra("likes", likes);
+                intent.putExtra("comments", comments);
+                startActivity(intent);
+            }
+        });
+        detailsBinding.shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plan");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Blogging me share");
+                String text = title + "\n\n want to read more? get the app on google play store it's called blogging me";
+                intent.putExtra(Intent.EXTRA_TEXT, text);
+                startActivity(Intent.createChooser(intent, "share with :"));
+            }
+        });
     }
+
 }
