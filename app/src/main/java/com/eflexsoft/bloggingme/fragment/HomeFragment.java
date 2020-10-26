@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
             public void onChanged(User user) {
                 if (user != null) {
                     RequestOptions requestOptions = new RequestOptions();
-                    requestOptions.placeholder(R.drawable.no_p);
+                    requestOptions.placeholder(R.color.brown);
                     requestOptions.error(R.drawable.no_p);
 
                     Glide.with(getActivity()).load(user.getProPicUrl()).apply(requestOptions).into(fragmentHomeBinding.homeProPic);
@@ -155,6 +155,22 @@ public class HomeFragment extends Fragment {
                     });
                 }
 
+                if (holder.postItemBinding.likeSwitcher2.getCurrentView() == null) {
+
+                    holder.postItemBinding.likeSwitcher2.setFactory(new ViewSwitcher.ViewFactory() {
+                        @Override
+                        public View makeView() {
+
+                            TextView textView = new TextView(getContext());
+                            textView.setGravity(Gravity.CENTER_VERTICAL);
+                            textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            textView.setTextSize(15);
+
+                            return textView;
+                        }
+                    });
+                }
+
                 long[] count = {model.getLikes()};
                 boolean[] isLiked = {false};
 
@@ -165,6 +181,11 @@ public class HomeFragment extends Fragment {
 
                 holder.postItemBinding.likeSwitcher.setInAnimation(in);
                 holder.postItemBinding.likeSwitcher.setOutAnimation(out);
+
+                holder.postItemBinding.likeSwitcher2.setText(String.valueOf(model.getComments()));
+
+                holder.postItemBinding.likeSwitcher2.setInAnimation(in);
+                holder.postItemBinding.likeSwitcher2.setOutAnimation(out);
 
                 FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -218,9 +239,8 @@ public class HomeFragment extends Fragment {
                         assert user != null;
                         holder.postItemBinding.postUserName.setText(user.getFirstName() + " " + user.getLastName());
 
-
                         RequestOptions requestOptions = new RequestOptions();
-                        requestOptions.placeholder(R.drawable.no_p);
+                        requestOptions.placeholder(R.color.brown);
                         requestOptions.error(R.drawable.no_p);
 
                         Glide.with(getActivity()).load(user.getProPicUrl()).apply(requestOptions).into(holder.postItemBinding.postProPic);
@@ -261,6 +281,8 @@ public class HomeFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
+
+
 
             }
 

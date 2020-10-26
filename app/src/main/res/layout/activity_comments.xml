@@ -73,7 +73,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="0dp"
                             android:layout_toEndOf="@id/detailed_pro_pic"
-
+                            android:set_Pretty_Time="@{post.date}"
                             android:textColor="#7E7E7E"
                             android:textSize="12sp" />
 
@@ -90,19 +90,24 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/commentse_recycler"
+                    android:id="@+id/c_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#F1EDED" />
+                    android:layout_height="match_parent" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-            <ProgressBar
-                android:id="@+id/pro_bar"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center" />
+<!--            <ProgressBar-->
+<!--                android:id="@+id/pro_bar"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_gravity="center" />-->
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_above="@id/sed_l_y"
+            android:background="#959595" />
 
         <RelativeLayout
             android:id="@+id/sed_l_y"
@@ -112,9 +117,10 @@
 
             <ImageView
                 android:id="@+id/comment_img"
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
+                android:layout_centerHorizontal="true"
                 android:visibility="gone"
                 android:src="@drawable/img_test" />
 
@@ -128,7 +134,6 @@
                 android:layout_marginEnd="5dp"
                 android:layout_below="@id/comment_img"
                 android:layout_marginBottom="5dp"
-                android:background="@android:color/transparent"
                 android:src="@drawable/ic_add_img" />
 
             <com.rengwuxian.materialedittext.MaterialEditText

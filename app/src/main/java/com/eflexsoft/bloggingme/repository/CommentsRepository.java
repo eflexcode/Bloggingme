@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 
+import com.eflexsoft.bloggingme.model.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
@@ -36,7 +38,7 @@ public class CommentsRepository {
 
     Context context;
     public MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
-
+    public MutableLiveData<User> userMutableLiveData = new MutableLiveData<>();
 
     public CommentsRepository(Context context) {
         this.context = context;
@@ -46,6 +48,7 @@ public class CommentsRepository {
 
         FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        long commentId = System.currentTimeMillis();
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
 
@@ -53,14 +56,14 @@ public class CommentsRepository {
 
         if (imageUri == null) {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("CommenterId", firebaseAuth.getUid());
-            map.put("commentId", System.currentTimeMillis());
+            map.put("commenterId", firebaseAuth.getUid());
+            map.put("commentId", commentId);
             map.put("date", date);
             map.put("commentsBody", commentText);
-            map.put("CommentImage", "none");
+            map.put("commentImage", "none");
 
             DocumentReference documentReference = firebaseFirestore.collection("Posts").document(postId)
-                    .collection("comments").document(FirebaseAuth.getInstance().getUid());
+                    .collection("comments").document(String.valueOf(commentId));
 
             documentReference.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -109,9 +112,8 @@ public class CommentsRepository {
 
                         String downloadUri = task.getResult().toString();
 
-
                         DocumentReference documentReference = firebaseFirestore.collection("Posts").document(postId)
-                                .collection("comments").document(FirebaseAuth.getInstance().getUid());
+                                .collection("comments").document(String.valueOf(commentId));
 
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.ENGLISH);
 
@@ -121,10 +123,10 @@ public class CommentsRepository {
 
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("commenterId", firebaseAuth.getUid());
-                        map.put("comment", System.currentTimeMillis());
+                        map.put("commentId", commentId);
                         map.put("date", date);
                         map.put("commentsBody", commentText);
-                        map.put("CommentImage", downloadUri);
+                        map.put("commentImage", downloadUri);
 
                         documentReference.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -180,5 +182,23 @@ public class CommentsRepository {
         ContentResolver contentResolver = context.getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(url));
+    }
+
+    public void getUserDetails(String id) {
+
+        DocumentReference documentReference = FirebaseFirestore.getInstance().collection("Users").document(id);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                User user = value.toObject(User.class);
+
+                userMutableLiveData.setValue(user);
+
+
+
+            }
+        });
+
     }
 }

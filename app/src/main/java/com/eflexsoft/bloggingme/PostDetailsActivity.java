@@ -7,7 +7,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -65,14 +70,60 @@ public class PostDetailsActivity extends AppCompatActivity {
             detailsBinding.imagePost.setVisibility(View.VISIBLE);
         }
 
+        Animation in = AnimationUtils.loadAnimation(this, R.anim.slide_in_right);
+        Animation out = AnimationUtils.loadAnimation(this, R.anim.slide_out_lift);
+
+        if (detailsBinding.likeSwitcher2.getCurrentView() == null) {
+
+            detailsBinding.likeSwitcher2.setFactory(new ViewSwitcher.ViewFactory() {
+                @Override
+                public View makeView() {
+
+                    TextView textView = new TextView(PostDetailsActivity.this);
+                    textView.setGravity(Gravity.CENTER_VERTICAL);
+                    textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    textView.setTextSize(15);
+
+                    return textView;
+                }
+            });
+        }
+
+        detailsBinding.likeSwitcher2.setInAnimation(in);
+        detailsBinding.likeSwitcher2.setOutAnimation(out);
+
+        detailsBinding.likeSwitcher2.setText(String.valueOf(comments));
+
+        if (detailsBinding.likeSwitcher.getCurrentView() == null) {
+
+            detailsBinding.likeSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+                @Override
+                public View makeView() {
+
+                    TextView textView = new TextView(PostDetailsActivity.this);
+                    textView.setGravity(Gravity.CENTER_VERTICAL);
+                    textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    textView.setTextSize(15);
+
+                    return textView;
+                }
+            });
+        }
+
+        detailsBinding.likeSwitcher.setInAnimation(in);
+        detailsBinding.likeSwitcher.setOutAnimation(out);
+
+        detailsBinding.likeSwitcher.setText(String.valueOf(likes));
+
         detailsBinding.setPost(post);
 
         viewModel.getUserMutableLiveData(id).observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
                 if (user != null) {
+
                     RequestOptions requestOptions = new RequestOptions();
-                    requestOptions.placeholder(R.drawable.no_p);
+                    requestOptions.placeholder(R.color.brown);
                     requestOptions.error(R.drawable.no_p);
 
                     Glide.with(PostDetailsActivity.this).load(user.getProPicUrl()).apply(requestOptions).into(detailsBinding.detailedProPic);

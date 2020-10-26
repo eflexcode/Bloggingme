@@ -114,11 +114,13 @@ public class Post {
     public static void setImg(ImageView circleImageView, String utl){
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.error(R.drawable.ic_broken_image);
+        requestOptions.placeholder(R.color.brown);
+        requestOptions.error(R.color.brown);
 
         Glide.with(circleImageView).load(utl).apply(requestOptions).into(circleImageView);
 
     }
+
     @BindingAdapter("android:set_Pretty_Time")
     public static void setTime(TextView textView, String time){
 
