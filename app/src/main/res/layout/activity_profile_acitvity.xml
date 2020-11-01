@@ -1,11 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ProfileActivity">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/cover_p"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    android:src="@color/brown" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/pro_proPic"
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/cover_p"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="-50dp"
+                    app:civ_border_color="#fff"
+                    app:civ_border_width="4dp" />
+
+                <TextView
+                    android:id="@+id/uName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pro_proPic"
+                    android:layout_alignStart="@id/pro_proPic"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/uBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/uName"
+                    android:layout_alignStart="@id/pro_proPic"
+                    android:layout_marginTop="5dp"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    android:textStyle="normal" />
+
+                <LinearLayout
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/uBio"
+                    android:layout_alignStart="@id/pro_proPic"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/source"
+                        android:layout_width="20dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_calendar_today"
+                        android:text=""
+                        android:textColor="#EDEDED"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="#8C8C8C"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/location_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/date"
+                    android:layout_alignStart="@id/pro_proPic"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <ImageView
+                        android:id="@+id/img"
+                        android:layout_width="20dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/ic_location_on"
+                        android:text=""
+                        android:textColor="#EDEDED"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="1dp"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="#8C8C8C"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:layout_below="@id/location_layout"
+                    android:paddingBottom="5dp"
+                    android:textAlignment="textStart"
+                    app:tabIndicator="@drawable/tab_indicator_style"
+                    app:tabIndicatorColor="@color/colorPrimary"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabPaddingBottom="5dp"
+                    app:tabSelectedTextColor="@color/colorPrimary"
+                    app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                    app:tabTextColor="#AEABAB" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="800dp"
+                    android:layout_below="@id/tab_layout" />
+
+            </RelativeLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <!--    <com.google.android.material.appbar.AppBarLayout-->
+        <!--        android:id="@+id/p_bar"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content">-->
+
+        <!--        <com.google.android.material.appbar.CollapsingToolbarLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content">-->
+
+        <!--            -->
+        <!--            -->
+        <!--            <androidx.appcompat.widget.Toolbar-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:background="#fff"-->
+        <!--                android:layout_height="?attr/actionBarSize">-->
+
+        <!--                <RelativeLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:id="@+id/back"-->
+        <!--                        android:layout_width="50dp"-->
+        <!--                        android:background="@drawable/dtae_backgrond2"-->
+        <!--                        android:layout_height="50dp"-->
+        <!--                        android:padding="12sp"-->
+        <!--                        android:src="@drawable/ic_arrow2" />-->
 
 
+        <!--                </RelativeLayout>-->
 
-</RelativeLayout>
+        <!--            </androidx.appcompat.widget.Toolbar>-->
+
+
+        <!--        </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+
+        <!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+
+    </RelativeLayout>
+</layout>

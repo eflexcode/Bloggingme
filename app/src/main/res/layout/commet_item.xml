@@ -59,7 +59,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/comment"
+            android:id="@+id/comment_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/comment_time"
@@ -75,7 +75,7 @@
             android:id="@+id/image_comment"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_below="@+id/comment"
+            android:layout_below="@+id/comment_text"
             android:layout_marginStart="10dp"
 
             android:layout_toEndOf="@id/comment_pro_pic"

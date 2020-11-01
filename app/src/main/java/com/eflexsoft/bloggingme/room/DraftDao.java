@@ -1,6 +1,7 @@
 package com.eflexsoft.bloggingme.room;
 
 import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;

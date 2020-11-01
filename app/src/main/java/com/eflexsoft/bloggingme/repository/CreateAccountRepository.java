@@ -46,6 +46,8 @@ public class CreateAccountRepository {
                     map.put("lastName",lastName);
                     map.put("email",email);
                     map.put("proPicUrl","none");
+                    map.put("bio","unavailable");
+                    map.put("location","unavailable");
 
                     documentReference.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

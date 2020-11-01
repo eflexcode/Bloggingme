@@ -16,10 +16,10 @@
         android:icon="@drawable/search_selected"
         android:title="@string/search" />
 
-    <item
-        android:id="@+id/notification"
-        android:icon="@drawable/notify_selected"
-        android:title="@string/notification" />
+<!--    <item-->
+<!--        android:id="@+id/notification"-->
+<!--        android:icon="@drawable/notify_selected"-->
+<!--        android:title="@string/notification" />-->
 
     <item
         android:id="@+id/message"

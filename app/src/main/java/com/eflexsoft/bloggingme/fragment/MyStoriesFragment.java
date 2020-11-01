@@ -1,7 +1,6 @@
 package com.eflexsoft.bloggingme.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
@@ -9,11 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,15 +24,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.eflexsoft.bloggingme.CommentsActivity;
 import com.eflexsoft.bloggingme.PostDetailsActivity;
-import com.eflexsoft.bloggingme.ProfileActivity;
 import com.eflexsoft.bloggingme.R;
-import com.eflexsoft.bloggingme.databinding.FragmentHomeBinding;
+import com.eflexsoft.bloggingme.databinding.FragmentMyStoriesBinding;
 import com.eflexsoft.bloggingme.databinding.PostItemBinding;
 import com.eflexsoft.bloggingme.model.Post;
 import com.eflexsoft.bloggingme.model.User;
 import com.eflexsoft.bloggingme.viewholder.PostItemViewHolder;
-import com.eflexsoft.bloggingme.viewmodel.FragmentHomeViewModel;
-import com.firebase.ui.database.paging.FirebaseRecyclerPagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter;
 import com.firebase.ui.firestore.paging.FirestorePagingOptions;
 import com.firebase.ui.firestore.paging.LoadingState;
@@ -49,75 +42,27 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 
 
-public class HomeFragment extends Fragment {
+public class MyStoriesFragment extends Fragment {
 
-    FragmentHomeBinding fragmentHomeBinding;
-
-    FragmentHomeViewModel viewModel;
-    int count = 1;
-
-    boolean isLiked = false;
+    FragmentMyStoriesBinding fragmentMyStoriesBinding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_home, container, false);
 
-        fragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
+        fragmentMyStoriesBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_stories, container, false);
 
-        View view = fragmentHomeBinding.getRoot();
-
-        fragmentHomeBinding.swipeRef.setColorSchemeResources(R.color.colorPrimary);
+        View view = fragmentMyStoriesBinding.getRoot();
 
         initRecycler();
 
-        viewModel = new ViewModelProvider(getActivity()).get(FragmentHomeViewModel.class);
-        viewModel.getUserMutableLiveData().observe(getViewLifecycleOwner(), new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                if (user != null) {
-                    RequestOptions requestOptions = new RequestOptions();
-                    requestOptions.placeholder(R.color.brown);
-                    requestOptions.error(R.drawable.no_p);
-
-                    Glide.with(getActivity()).load(user.getProPicUrl()).apply(requestOptions).into(fragmentHomeBinding.homeProPic);
-
-
-                }
-            }
-        });
-
-        fragmentHomeBinding.swipeRef.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                initRecycler();
-            }
-        });
-
-        fragmentHomeBinding.netRef.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentHomeBinding.swipeRef.setRefreshing(true);
-                initRecycler();
-            }
-        });
-
-        fragmentHomeBinding.homeProPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getContext(), ProfileActivity.class));
-
-            }
-        });
-
         return view;
-
 
     }
 
     public void initRecycler() {
+
         PagedList.Config builder = new PagedList.Config.Builder()
                 .setInitialLoadSizeHint(20)
                 .setPrefetchDistance(10)
@@ -125,7 +70,8 @@ public class HomeFragment extends Fragment {
                 .setEnablePlaceholders(false)
                 .build();
 
-        Query query = FirebaseFirestore.getInstance().collection("Posts").orderBy("postId", Query.Direction.DESCENDING);
+        Query query = FirebaseFirestore.getInstance().collection("Posts")
+                .whereEqualTo("PosterId", FirebaseAuth.getInstance().getUid()).orderBy("postId", Query.Direction.DESCENDING);
 
         FirestorePagingOptions<Post> pagingOptions = new FirestorePagingOptions.Builder<Post>()
                 .setLifecycleOwner(this)
@@ -138,9 +84,9 @@ public class HomeFragment extends Fragment {
 
                 holder.postItemBinding.setPost(model);
 
-                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(),R.raw.like3);
-                mediaPlayer.setVolume(1,1);
-                
+                MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), R.raw.like3);
+                mediaPlayer.setVolume(1, 1);
+
                 if (model.getPostImage().equals("none")) {
                     holder.postItemBinding.imagePost.setVisibility(View.GONE);
                 } else {
@@ -224,13 +170,13 @@ public class HomeFragment extends Fragment {
                             holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_not_liked);
                             isLiked[0] = false;
                             count[0] = count[0] - 1;
-                            viewModel.removeLike(model.getPostId());
+//                            viewModel.removeLike(model.getPostId());
 
                         } else {
                             holder.postItemBinding.starButton.setImageResource(R.drawable.ic_heart_liked);
                             isLiked[0] = true;
                             count[0] = count[0] + 1;
-                            viewModel.addLike(model.getPostId());
+//                            viewModel.addLike(model.getPostId());
                             mediaPlayer.start();
                         }
 
@@ -271,7 +217,7 @@ public class HomeFragment extends Fragment {
                         intent.putExtra("postImage", model.getPostImage());
                         intent.putExtra("date", model.getDate());
                         intent.putExtra("likes", model.getLikes());
-                        intent.putExtra("comments",model.getComments());
+                        intent.putExtra("comments", model.getComments());
                         startActivity(intent);
                     }
                 });
@@ -287,7 +233,7 @@ public class HomeFragment extends Fragment {
                         intent.putExtra("postImage", model.getPostImage());
                         intent.putExtra("date", model.getDate());
                         intent.putExtra("likes", model.getLikes());
-                        intent.putExtra("comments",model.getComments());
+                        intent.putExtra("comments", model.getComments());
                         startActivity(intent);
                     }
                 });
@@ -297,10 +243,10 @@ public class HomeFragment extends Fragment {
                     public void onClick(View v) {
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         intent.setType("text/plan");
-                        intent.putExtra(Intent.EXTRA_SUBJECT,"Blogging me share");
-                        String text = model.getStoryTitle()+"\n\n want to read more? get the app on google play store it's called blogging me";
-                        intent.putExtra(Intent.EXTRA_TEXT,text);
-                        startActivity(Intent.createChooser(intent,"share with :"));
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Blogging me share");
+                        String text = model.getStoryTitle() + "\n\n want to read more? get the app on google play store it's called blogging me";
+                        intent.putExtra(Intent.EXTRA_TEXT, text);
+                        startActivity(Intent.createChooser(intent, "share with :"));
                     }
                 });
 
@@ -320,9 +266,7 @@ public class HomeFragment extends Fragment {
             @Override
             protected void onError(@NonNull Exception e) {
                 super.onError(e);
-                fragmentHomeBinding.proBar.setVisibility(View.GONE);
-                fragmentHomeBinding.linEr.setVisibility(View.VISIBLE);
-                fragmentHomeBinding.swipeRef.setRefreshing(false);
+                fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
             }
 
             @Override
@@ -331,42 +275,30 @@ public class HomeFragment extends Fragment {
 
                 switch (state) {
                     case ERROR:
-
-                        fragmentHomeBinding.proBar.setVisibility(View.GONE);
-                        fragmentHomeBinding.linEr.setVisibility(View.VISIBLE);
-                        fragmentHomeBinding.swipeRef.setRefreshing(false);
+                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case FINISHED:
 //                        fragmentHomeBinding.proBar.setVisibility(View.GONE);
 //                        fragmentHomeBinding.linEr.setVisibility(View.VISIBLE);
-//                        fragmentHomeBinding.swipeRef.setRefreshing(false);
+                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case LOADING_MORE:
-                        fragmentHomeBinding.linEr.setVisibility(View.GONE);
-                        fragmentHomeBinding.swipeRef.setRefreshing(false);
+                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case LOADING_INITIAL:
-                        fragmentHomeBinding.proBar.setVisibility(View.VISIBLE);
-                        fragmentHomeBinding.linEr.setVisibility(View.GONE);
-                        fragmentHomeBinding.swipeRef.setRefreshing(false);
+                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case LOADED:
-                        fragmentHomeBinding.proBar.setVisibility(View.GONE);
-                        fragmentHomeBinding.linEr.setVisibility(View.GONE);
-                        fragmentHomeBinding.swipeRef.setRefreshing(false);
+                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                 }
 
-
             }
-
 
         };
 
-
-        fragmentHomeBinding.homeRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        fragmentHomeBinding.homeRecycler.setAdapter(firestorePagingAdapter);
-
+        fragmentMyStoriesBinding.myStoriesRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        fragmentMyStoriesBinding.myStoriesRecycler.setAdapter(firestorePagingAdapter);
 
     }
 

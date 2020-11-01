@@ -141,7 +141,7 @@ public class CommentsActivity extends AppCompatActivity {
                     activityCommentsBinding.commentText.setText("");
                     activityCommentsBinding.commentImg.setImageURI(null);
                     activityCommentsBinding.commentImg.setVisibility(View.GONE);
-                    Toast.makeText(CommentsActivity.this, "swipe down to see comment", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentsActivity.this, "swipe down to see comment_text", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -245,7 +245,6 @@ public class CommentsActivity extends AppCompatActivity {
                         activityCommentsBinding.swipeRef.setRefreshing(false);
                         break;
                 }
-
 
             }
 

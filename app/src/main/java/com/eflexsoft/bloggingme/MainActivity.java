@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //prints: “moments from now”
 //        p.format("edw2w");
 
-        System.out.println(p.format(new Date(System.currentTimeMillis() + 1000*60*10)));
+//        System.out.println(p.format(new Date(System.currentTimeMillis() + 1000*60*10)));
         //prints: “10 minutes from now”
 
         if (savedInstanceState == null){
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+
                     case R.id.home:
 
                         fragment = new HomeFragment();
@@ -74,12 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
                         fragment = new MessageFragment();
                         break;
-
-                    case R.id.notification:
-
-                        fragment = new NotificationFragment();
-                        break;
-
 
                 }
 
