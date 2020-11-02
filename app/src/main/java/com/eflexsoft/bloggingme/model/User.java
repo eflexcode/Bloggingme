@@ -14,17 +14,19 @@ public class User {
     private String proPicUrl;
     private String bio;
     private String location;
+    private String date;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String proPicUrl, String bio, String location) {
+    public User(String firstName, String lastName, String email, String proPicUrl, String bio, String location,String date) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.proPicUrl = proPicUrl;
         this.bio = bio;
         this.location = location;
+        this.date = date;
     }
 
     public String getFirstName() {
@@ -73,5 +75,13 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

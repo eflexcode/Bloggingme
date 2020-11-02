@@ -266,7 +266,7 @@ public class MyStoriesFragment extends Fragment {
             @Override
             protected void onError(@NonNull Exception e) {
                 super.onError(e);
-                fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
+//                fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
             }
 
             @Override
@@ -275,21 +275,21 @@ public class MyStoriesFragment extends Fragment {
 
                 switch (state) {
                     case ERROR:
-                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
+//                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case FINISHED:
 //                        fragmentHomeBinding.proBar.setVisibility(View.GONE);
 //                        fragmentHomeBinding.linEr.setVisibility(View.VISIBLE);
-                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
+//                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case LOADING_MORE:
-                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
+//                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case LOADING_INITIAL:
-                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
+//                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                     case LOADED:
-                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
+//                        fragmentMyStoriesBinding.swipeRef.setRefreshing(false);
                         break;
                 }
 

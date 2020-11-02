@@ -1,6 +1,7 @@
 package com.eflexsoft.bloggingme;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -24,13 +25,14 @@ public class ProfileActivity extends AppCompatActivity {
 
     ProfileStoriesAdapter adapter;
     ProfileViewModel viewModel;
+    ActivityProfileAcitvityBinding activityProfileAcitvityBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_profile_acitvity);
 
-        ActivityProfileAcitvityBinding activityProfileAcitvityBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile_acitvity);
+        activityProfileAcitvityBinding = DataBindingUtil.setContentView(this, R.layout.activity_profile_acitvity);
 
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         viewModel.getUserDetails();
@@ -45,13 +47,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         adapter = new ProfileStoriesAdapter(getSupportFragmentManager(), strings, fragments);
 
+
         activityProfileAcitvityBinding.viewPager.setAdapter(adapter);
         activityProfileAcitvityBinding.tabLayout.setupWithViewPager(activityProfileAcitvityBinding.viewPager);
 
         viewModel.getUserMutableLiveData().observe(this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
-
+                activityProfileAcitvityBinding.net.scrollTo(0,0);
                 RequestOptions requestOptions = new RequestOptions();
                 requestOptions.placeholder(R.color.brown);
                 requestOptions.error(R.drawable.no_p);
@@ -60,19 +63,37 @@ public class ProfileActivity extends AppCompatActivity {
                 Glide.with(ProfileActivity.this).load(user.getProPicUrl()).apply(requestOptions).into(activityProfileAcitvityBinding.proProPic);
 
                 if (user.getBio() == null) {
-                    activityProfileAcitvityBinding.uBio.setText("unavailable");
+                    activityProfileAcitvityBinding.uBio.setText("bio unavailable");
                 } else {
                     activityProfileAcitvityBinding.uBio.setText(user.getBio());
                 }
 
                 if (user.getLocation() == null) {
-                    activityProfileAcitvityBinding.location.setText("unavailable");
+                    activityProfileAcitvityBinding.location.setText("location unavailable");
                 } else {
                     activityProfileAcitvityBinding.location.setText(user.getLocation());
+                }
+
+                if (user.getDate() == null) {
+                    activityProfileAcitvityBinding.time.setText("dob unavailable");
+                } else {
+                    activityProfileAcitvityBinding.time.setText(user.getDate());
                 }
 
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityProfileAcitvityBinding.net.scrollTo(0,0);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        activityProfileAcitvityBinding.net.scrollTo(0,0);
     }
 }

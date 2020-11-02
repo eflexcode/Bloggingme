@@ -6,16 +6,18 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ProfileActivity">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:id="@+id/net"
             android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/cover_p"
@@ -69,13 +71,12 @@
                     android:padding="2dp">
 
                     <ImageView
-                        android:id="@+id/source"
+                        android:id="@+id/dob"
                         android:layout_width="20dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
                         android:src="@drawable/ic_calendar_today"
-                        android:text=""
                         android:textColor="#EDEDED"
                         android:textSize="10sp"
                         android:textStyle="bold" />
@@ -151,7 +152,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="800dp"
+                    android:layout_height="1000dp"
                     android:layout_below="@id/tab_layout" />
 
             </RelativeLayout>
